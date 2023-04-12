@@ -29,6 +29,8 @@ def words_to_number(number1):
         number1=number1.replace('eight','8')
     if 'nine' in number1:
         number1=number1.replace('nine','9')
+    if number1.isalpha():
+        raise ValueError("Error : Input should be between zero to nine")
     return number1
 
 def number_to_word(number1):
@@ -68,14 +70,21 @@ def gcd_value(x : int,y : int):
         return x
     else:
         return gcd_value(y,x%y)
+    
+if __name__ == "__main__":
+    try:
+        input_1=input("Enter number one: ")
+        if input_1.isnumeric():
+            raise ValueError("Error : Invalid Input please put it in words")
+        n1=int(words_to_number(input_1))
+        input_2=input("Enter number two: ")
+        if input_2.isnumeric():
+           raise ValueError("Error : Invalid Input in number two please put it in words.")
+        n2=int(words_to_number(input_2))
 
-
-input_1=input("Enter number one: ")
-input_2=input("Enter number two: ")
-
-n1=int(words_to_number(input_1))
-n2=int(words_to_number(input_2))
-
-answer=gcd_value(n1,n2)
-answer=number_to_word(str(answer))
-print(f"The GCD of {str(n1)} & {str(n2)} is {answer}")
+        answer=gcd_value(n1,n2)
+        answer=number_to_word(str(answer))
+        print(f"The GCD of {str(n1)} & {str(n2)} is {answer}")
+        
+    except Exception as e:
+        print("Error: {}".format(str(e)))
